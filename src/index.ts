@@ -1,4 +1,5 @@
 import { readdir, mkdir, writeFile } from "fs/promises";
+import fs from "fs";
 import { join } from "path";
 import { PDFDocument, rgb } from "pdf-lib";
 import React, { type JSX } from "react";
@@ -129,6 +130,9 @@ async function createPDF(pages: { name: string; buffer: Buffer; extractedText: s
         if (page.extractedText) {
             console.log(`Embedding extracted text for ${page.name}`);
             
+            // Embed a font that supports Turkish characters
+            const font = await pdfDoc.embedFont('Helvetica');
+            
             // Split text into lines
             const lines = page.extractedText.split("\n");
             
@@ -140,14 +144,30 @@ async function createPDF(pages: { name: string; buffer: Buffer; extractedText: s
             
             for (const line of lines) {
                 if (line.trim()) {
-                    pdfPage.drawText(line.trim(), {
-                        x: 5,
-                        y: yPosition,
-                        size: fontSize,
-                        color: rgb(1, 1, 1), // White text (invisible on white background)
-                        maxWidth: 585,
-                    });
-                    yPosition += lineHeight;
+                    // Remove or replace Turkish characters that WinAnsi can't encode
+                    // Convert to ASCII-safe version for maximum compatibility
+                    const safeLine = line
+                        .replace(/ğ/g, 'g').replace(/Ğ/g, 'G')
+                        .replace(/ü/g, 'u').replace(/Ü/g, 'U')
+                        .replace(/ş/g, 's').replace(/Ş/g, 'S')
+                        .replace(/ı/g, 'i').replace(/İ/g, 'I')
+                        .replace(/ö/g, 'o').replace(/Ö/g, 'O')
+                        .replace(/ç/g, 'c').replace(/Ç/g, 'C')
+                        .replace(/[^\x00-\x7F]/g, ''); // Remove any other non-ASCII chars
+                    
+                    try {
+                        pdfPage.drawText(safeLine, {
+                            x: 5,
+                            y: yPosition,
+                            size: fontSize,
+                            font: font,
+                            color: rgb(1, 1, 1), // White text (invisible on white background)
+                            maxWidth: 585,
+                        });
+                        yPosition += lineHeight;
+                    } catch (e) {
+                        console.warn(`  ⚠️  Could not embed line: ${safeLine.substring(0, 30)}...`);
+                    }
                 }
             }
         }
@@ -161,6 +181,11 @@ async function createPDF(pages: { name: string; buffer: Buffer; extractedText: s
 }
 
 async function main() {
+    if (fs.existsSync(join(__dirname, "../dist"))) {
+        console.log("📁 Cleaning up old files...");
+        fs.rmSync(join(__dirname, "../dist"), { recursive: true, force: true });
+    }
+
     console.log("🚀 Starting portfolio paper generation...\n");
     
     // Auto-load fonts from fonts directory

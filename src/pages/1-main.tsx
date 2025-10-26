@@ -1,7 +1,7 @@
 import React from "react";
 
-const SkillBar = ({ skill, percentage, color }: { skill: string; percentage: number; color: string }) => (
-    <div style={{ marginBottom: "30px", display: "flex", flexDirection: "column" }}>
+const SkillBar = ({ skill, percentage, color, ...otherProps }: { skill: string; percentage: number; color: string; [key: string]: any }) => (
+    <div style={{ marginBottom: "30px", display: "flex", flexDirection: "column" }} {...otherProps}>
         <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "15px" }}>
             <span style={{ fontSize: "50px", fontWeight: "600", color: "#2d3748" }}>{skill}</span>
             <span style={{ fontSize: "46px", color: "#718096", fontWeight: "600" }}>{percentage}%</span>
@@ -32,14 +32,14 @@ const Section = ({ title, children }: { title: string; children: React.ReactNode
     </div>
 );
 
-const InfoBox = ({ text, color }: { text: string; color: string }) => (
+const InfoBox = ({ text, color, ...otherProps }: { text: string; color: string; [key: string]: any }) => (
     <div style={{
         display: "flex",
         alignItems: "center",
         padding: "33px 50px",
         backgroundColor: "#edf2f7",
         borderRadius: "17px",
-    }}>
+    }} {...otherProps}>
         <div style={{
             width: "25px",
             height: "25px",
@@ -90,36 +90,40 @@ export default function Home() {
                     />
                     
                     <div style={{ display: "flex", flexDirection: "column" }}>
-                        <h1 style={{
-                            fontSize: "150px",
-                            fontWeight: "900",
-                            margin: "0 0 17px 0",
-                            color: "#1a202c",
-                            fontFamily: "Oswald",
-                            letterSpacing: "6px",
-                        }}>
+                        <h1 
+                            data-role="name"
+                            style={{
+                                fontSize: "150px",
+                                fontWeight: "900",
+                                margin: "0 0 17px 0",
+                                color: "#1a202c",
+                                fontFamily: "Oswald",
+                                letterSpacing: "6px",
+                            }}>
                             ERDEM GÖKSEL
                         </h1>
-                        <p style={{
-                            fontSize: "67px",
-                            color: "#4a5568",
-                            margin: "0",
-                            fontWeight: "500",
-                        }}>
+                        <p 
+                            data-role="content"
+                            style={{
+                                fontSize: "67px",
+                                color: "#4a5568",
+                                margin: "0",
+                                fontWeight: "500",
+                            }}>
                             Fullstack Geliştirici
                         </p>
                     </div>
                 </div>
                 <div style={{ textAlign: "right", marginTop: "17px", display: "flex", flexDirection: "column" }}>
-                    <div style={{ fontSize: "50px", color: "#718096", marginBottom: "12px", display: "flex", gap: "17px", justifyContent: "flex-end" }}>
+                    <div data-role="content" style={{ fontSize: "50px", color: "#718096", marginBottom: "12px", display: "flex", gap: "17px", justifyContent: "flex-end" }}>
                         <span style={{ color: "#2d3748", fontWeight: "700" }}>Kıdemli</span>
                         <span>TypeScript Geliştirici</span>
                     </div>
-                    <div style={{ fontSize: "50px", color: "#718096", marginBottom: "12px", display: "flex", gap: "17px", justifyContent: "flex-end" }}>
+                    <div data-role="content" style={{ fontSize: "50px", color: "#718096", marginBottom: "12px", display: "flex", gap: "17px", justifyContent: "flex-end" }}>
                         <span style={{ color: "#2d3748", fontWeight: "700" }}>Orta Seviye</span>
                         <span>Rust Geliştirici</span>
                     </div>
-                    <div style={{ fontSize: "46px", color: "#a0aec0", marginTop: "33px" }}>
+                    <div data-role="content" style={{ fontSize: "46px", color: "#a0aec0", marginTop: "33px" }}>
                         50+ Tamamlanmış Proje
                     </div>
                 </div>
@@ -156,7 +160,7 @@ export default function Home() {
                     </h2>
                 </div>
                 <div style={{ display: "flex", gap: "50px", justifyContent: "space-around", width: "100%" }}>
-                    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", flex: 1 }}>
+                    <div data-role="content" style={{ display: "flex", flexDirection: "column", alignItems: "center", flex: 1 }}>
                         <span style={{ fontSize: "46px", fontWeight: "700", color: "#3182ce", marginBottom: "8px" }}>
                             Yaş
                         </span>
@@ -164,7 +168,7 @@ export default function Home() {
                             21
                         </span>
                     </div>
-                    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", flex: 1 }}>
+                    <div data-role="content" style={{ display: "flex", flexDirection: "column", alignItems: "center", flex: 1 }}>
                         <span style={{ fontSize: "46px", fontWeight: "700", color: "#3182ce", marginBottom: "8px" }}>
                             Ünvan
                         </span>
@@ -172,7 +176,7 @@ export default function Home() {
                             Yazılım Mühendisi
                         </span>
                     </div>
-                    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", flex: 1 }}>
+                    <div data-role="content" style={{ display: "flex", flexDirection: "column", alignItems: "center", flex: 1 }}>
                         <span style={{ fontSize: "46px", fontWeight: "700", color: "#3182ce", marginBottom: "8px" }}>
                             Uzmanlık Alanı
                         </span>
@@ -182,7 +186,7 @@ export default function Home() {
                     </div>
                 </div>
                 <div style={{ display: "flex", gap: "50px", justifyContent: "space-around", width: "100%", marginTop: "25px" }}>
-                    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", flex: 1 }}>
+                    <div data-role="email" style={{ display: "flex", flexDirection: "column", alignItems: "center", flex: 1 }}>
                         <span style={{ fontSize: "46px", fontWeight: "700", color: "#3182ce", marginBottom: "8px" }}>
                             E-posta
                         </span>
@@ -190,7 +194,7 @@ export default function Home() {
                             erdem.goksel.dev@gmail.com
                         </span>
                     </div>
-                    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", flex: 1 }}>
+                    <div data-role="phone" style={{ display: "flex", flexDirection: "column", alignItems: "center", flex: 1 }}>
                         <span style={{ fontSize: "46px", fontWeight: "700", color: "#3182ce", marginBottom: "8px" }}>
                             Telefon
                         </span>
@@ -206,28 +210,30 @@ export default function Home() {
                 <div style={{ flex: "1", display: "flex", flexDirection: "column" }}>
                     {/* Skills Section */}
                     <Section title="Yetenekler">
-                        <SkillBar skill="Web Geliştirme" percentage={99} color="#3178c6" />
-                        <SkillBar skill="Sunucu Geliştirme" percentage={95} color="#38a169" />
-                        <SkillBar skill="Mobil Programlama" percentage={65} color="#fbbf24" />
-                        <SkillBar skill="Masaüstü Uygulama Geliştirme" percentage={80} color="#e53e3e" />
+                        <SkillBar skill="Web Geliştirme" percentage={99} color="#3178c6" data-role="skills-section" />
+                        <SkillBar skill="Sunucu Geliştirme" percentage={95} color="#38a169" data-role="skills-section" />
+                        <SkillBar skill="Mobil Programlama" percentage={65} color="#fbbf24" data-role="skills-section" />
+                        <SkillBar skill="Masaüstü Uygulama Geliştirme" percentage={80} color="#e53e3e" data-role="skills-section" />
                     </Section>
 
                     {/* Foreign Languages Section */}
                     <Section title="Yabancı Diller">
-                        <SkillBar skill="İngilizce" percentage={90} color="#3182ce" />
-                        <SkillBar skill="Japonca" percentage={20} color="#38a169" />
+                        <SkillBar skill="İngilizce" percentage={90} color="#3182ce" data-role="content" />
+                        <SkillBar skill="Japonca" percentage={20} color="#38a169" data-role="content" />
                     </Section>
 
                     {/* Education Section */}
                     <Section title="Eğitim">
-                        <div style={{
-                            backgroundColor: "#f7fafc",
-                            padding: "50px",
-                            borderRadius: "25px",
-                            borderLeft: "12px solid #3182ce",
-                            display: "flex",
-                            flexDirection: "column",
-                        }}>
+                        <div 
+                            data-role="education"
+                            style={{
+                                backgroundColor: "#f7fafc",
+                                padding: "50px",
+                                borderRadius: "25px",
+                                borderLeft: "12px solid #3182ce",
+                                display: "flex",
+                                flexDirection: "column",
+                            }}>
                             <div style={{ fontSize: "54px", fontWeight: "700", color: "#2d3748", marginBottom: "17px" }}>
                                 Yazılım Mühendisliği
                             </div>
@@ -243,34 +249,36 @@ export default function Home() {
                     {/* Links Section */}
                     <Section title="Bağlantılar">
                         <div style={{ display: "flex", flexDirection: "column", gap: "33px" }}>
-                            <div style={{
-                                display: "flex",
-                                alignItems: "center",
-                                padding: "33px 50px",
-                                backgroundColor: "#f7fafc",
-                                borderRadius: "17px",
-                                borderLeft: "8px solid #0077b5",
-                            }}>
+                            <div 
+                                style={{
+                                    display: "flex",
+                                    alignItems: "center",
+                                    padding: "33px 50px",
+                                    backgroundColor: "#f7fafc",
+                                    borderRadius: "17px",
+                                    borderLeft: "8px solid #0077b5",
+                                }}>
                                 <span style={{ fontSize: "46px", fontWeight: "700", color: "#0077b5", marginRight: "25px" }}>
                                     LinkedIn:
                                 </span>
-                                <span style={{ fontSize: "40px", color: "#4a5568" }}>
+                                <span style={{ fontSize: "40px", color: "#4a5568" }} data-role="social">
                                     linkedin.com/in/erdem-göksel-b04a8b202/
                                 </span>
                             </div>
-                            <div style={{
-                                display: "flex",
-                                flexDirection: "column",
-                                padding: "33px 50px",
-                                backgroundColor: "#f7fafc",
-                                borderRadius: "17px",
-                                borderLeft: "8px solid #333",
-                            }}>
+                            <div 
+                                style={{
+                                    display: "flex",
+                                    flexDirection: "column",
+                                    padding: "33px 50px",
+                                    backgroundColor: "#f7fafc",
+                                    borderRadius: "17px",
+                                    borderLeft: "8px solid #333",
+                                }}>
                                 <div style={{ display: "flex", alignItems: "center", marginBottom: "17px" }}>
                                     <span style={{ fontSize: "46px", fontWeight: "700", color: "#333", marginRight: "25px" }}>
                                         GitHub:
                                     </span>
-                                    <span style={{ fontSize: "40px", color: "#4a5568" }}>
+                                    <span style={{ fontSize: "40px", color: "#4a5568" }} data-role="social">
                                         github.com/ErdemGKSL
                                     </span>
                                 </div>
@@ -286,16 +294,18 @@ export default function Home() {
                 <div style={{ flex: "1", display: "flex", flexDirection: "column" }}>
                     {/* About Me Section */}
                     <Section title="Hakkımda">
-                        <div style={{
-                            backgroundColor: "#f7fafc",
-                            padding: "50px",
-                            borderRadius: "25px",
-                            fontSize: "44px",
-                            lineHeight: "1.6",
-                            color: "#4a5568",
-                            display: "flex",
-                            flexDirection: "column",
-                        }}>
+                        <div 
+                            data-role="content"
+                            style={{
+                                backgroundColor: "#f7fafc",
+                                padding: "50px",
+                                borderRadius: "25px",
+                                fontSize: "44px",
+                                lineHeight: "1.6",
+                                color: "#4a5568",
+                                display: "flex",
+                                flexDirection: "column",
+                            }}>
                             <p style={{ margin: "0 0 33px 0" }}>
                                 TypeScript ve Node.js ekosistemleri konusunda kapsamlı deneyime sahip, tutkulu bir fullstack geliştiriciyim. 
                                 Açık kaynak yazılım ve Linux tabanlı geliştirmeleri seviyorum, dolayısıyla sunuculara çok hakimim.
@@ -309,17 +319,17 @@ export default function Home() {
 
                     {/* Programming Languages Section */}
                     <Section title="Yazılım Dilleri">
-                        <SkillBar skill="Node.js & HTML & CSS" percentage={99} color="#3178c6" />
-                        <SkillBar skill="Rust" percentage={60} color="#ce422b" />
-                        <SkillBar skill="Kotlin & Java" percentage={30} color="#7f52ff" />
+                        <SkillBar skill="Node.js & HTML & CSS" percentage={99} color="#3178c6" data-role="skills-section" />
+                        <SkillBar skill="Rust" percentage={60} color="#ce422b" data-role="skills-section" />
+                        <SkillBar skill="Kotlin & Java" percentage={30} color="#7f52ff" data-role="skills-section" />
                     </Section>
 
                     {/* Additional Info */}
                     <Section title="Ek Bilgiler">
                         <div style={{ display: "flex", flexDirection: "column", gap: "25px" }}>
-                            <InfoBox text="Askerlik: 2028'e kadar tecilli" color="#48bb78" />
-                            <InfoBox text="Ehliyet: Kurs aşamasında" color="#ff8b32" />
-                            <InfoBox text="Ana İşletim Sistemi: Arch Linux" color="#4299e1" />
+                            <InfoBox text="Askerlik: 2028'e kadar tecilli" color="#48bb78" data-role="content" />
+                            <InfoBox text="Ehliyet: Kurs aşamasında" color="#ff8b32" data-role="content" />
+                            <InfoBox text="Ana İşletim Sistemi: Arch Linux" color="#4299e1" data-role="content" />
                         </div>
                     </Section>
                 </div>
