@@ -32,6 +32,27 @@ const Section = ({ title, children }: { title: string; children: React.ReactNode
     </div>
 );
 
+const InfoBox = ({ text, color }: { text: string; color: string }) => (
+    <div style={{
+        display: "flex",
+        alignItems: "center",
+        padding: "33px 50px",
+        backgroundColor: "#edf2f7",
+        borderRadius: "17px",
+    }}>
+        <div style={{
+            width: "25px",
+            height: "25px",
+            backgroundColor: color,
+            borderRadius: "50%",
+            marginRight: "33px",
+        }} />
+        <span style={{ fontSize: "46px", color: "#2d3748" }}>
+            {text}
+        </span>
+    </div>
+);
+
 export default function Home() {
     return (
         <div
@@ -296,60 +317,9 @@ export default function Home() {
                     {/* Additional Info */}
                     <Section title="Ek Bilgiler">
                         <div style={{ display: "flex", flexDirection: "column", gap: "25px" }}>
-                            <div style={{
-                                display: "flex",
-                                alignItems: "center",
-                                padding: "33px 50px",
-                                backgroundColor: "#edf2f7",
-                                borderRadius: "17px",
-                            }}>
-                                <div style={{
-                                    width: "25px",
-                                    height: "25px",
-                                    backgroundColor: "#48bb78",
-                                    borderRadius: "50%",
-                                    marginRight: "33px",
-                                }} />
-                                <span style={{ fontSize: "46px", color: "#2d3748" }}>
-                                    Askerlik: 2028'e kadar tecilli
-                                </span>
-                            </div>
-                            <div style={{
-                                display: "flex",
-                                alignItems: "center",
-                                padding: "33px 50px",
-                                backgroundColor: "#edf2f7",
-                                borderRadius: "17px",
-                            }}>
-                                <div style={{
-                                    width: "25px",
-                                    height: "25px",
-                                    backgroundColor: "#ff8b32",
-                                    borderRadius: "50%",
-                                    marginRight: "33px",
-                                }} />
-                                <span style={{ fontSize: "46px", color: "#2d3748" }}>
-                                    Ehliyet: Kurs aşamasında
-                                </span>
-                            </div>
-                            <div style={{
-                                display: "flex",
-                                alignItems: "center",
-                                padding: "33px 50px",
-                                backgroundColor: "#edf2f7",
-                                borderRadius: "17px",
-                            }}>
-                                <div style={{
-                                    width: "25px",
-                                    height: "25px",
-                                    backgroundColor: "#4299e1",
-                                    borderRadius: "50%",
-                                    marginRight: "33px",
-                                }} />
-                                <span style={{ fontSize: "46px", color: "#2d3748" }}>
-                                    Ana İşletim Sistemi: Arch Linux
-                                </span>
-                            </div>
+                            <InfoBox text="Askerlik: 2028'e kadar tecilli" color="#48bb78" />
+                            <InfoBox text="Ehliyet: Kurs aşamasında" color="#ff8b32" />
+                            <InfoBox text="Ana İşletim Sistemi: Arch Linux" color="#4299e1" />
                         </div>
                     </Section>
                 </div>
