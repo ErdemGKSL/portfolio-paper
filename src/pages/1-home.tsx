@@ -24,9 +24,9 @@ export default function Home() {
             >
                 <h1
                     style={{
-                        fontSize: "72px",
+                        fontSize: "576px",
                         fontWeight: "bold",
-                        marginBottom: "20px",
+                        marginBottom: "160px",
                         color: "#1a1a1a",
                         fontFamily: "Oswald",
                     }}
@@ -35,7 +35,7 @@ export default function Home() {
                 </h1>
                 <p
                     style={{
-                        fontSize: "32px",
+                        fontSize: "256px",
                         color: "#666666",
                         marginTop: "0",
                     }}
@@ -44,9 +44,9 @@ export default function Home() {
                 </p>
                 <p
                     style={{
-                        fontSize: "24px",
+                        fontSize: "192px",
                         color: "#999999",
-                        marginTop: "40px",
+                        marginTop: "320px",
                     }}
                 >
                     2025
