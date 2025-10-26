@@ -83,12 +83,14 @@ async function createPDF(pages: { name: string; buffer: Buffer }[]): Promise<voi
     
     for (const page of pages) {
         console.log(`Adding ${page.name} to PDF`);
-        
-        // Convert WebP to PNG for PDF embedding
-        const pngBuffer = await sharp(page.buffer).png().toBuffer();
-        
-        // Embed the PNG image
-        const image = await pdfDoc.embedPng(pngBuffer);
+
+        // Convert WebP to JPEG for PDF embedding
+        const jpegBuffer = await sharp(page.buffer)
+            .jpeg({ quality: 95 }) // High quality JPEG
+            .toBuffer();
+
+        // Embed the JPEG image
+        const image = await pdfDoc.embedJpg(jpegBuffer);
         
         // Add a page with A4 dimensions (in points: 595x842)
         const pdfPage = pdfDoc.addPage([A4_WIDTH, A4_HEIGHT]);
