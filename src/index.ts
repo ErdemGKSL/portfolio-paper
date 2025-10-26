@@ -1,10 +1,11 @@
 import { readdir, mkdir, writeFile } from "fs/promises";
 import { join } from "path";
-import { PDFDocument } from "pdf-lib";
+import { PDFDocument, rgb } from "pdf-lib";
 import React, { type JSX } from "react";
 import sharp from "sharp";
 import { autoLoadFonts } from "./load-fonts";
 import { render } from "./satori";
+import { extractAllText } from "./text-extract";
 
 // A4 dimensions in pixels at 300 DPI (high quality print)
 // A4 is 210mm x 297mm = 8.27in x 11.69in
@@ -46,26 +47,40 @@ async function discoverPages(): Promise<Page[]> {
     return pages;
 }
 
-async function renderPages(pages: Page[]): Promise<{ name: string; buffer: Buffer }[]> {
-    const rendered: { name: string; buffer: Buffer }[] = [];
+async function renderPages(pages: Page[]): Promise<{ name: string; buffer: Buffer; extractedText: string }[]> {
+    const rendered: { name: string; buffer: Buffer; extractedText: string }[] = [];
     
     for (const page of pages) {
         console.log(`Rendering page: ${page.order}-${page.name}`);
         
         const element = React.createElement(page.component);
+        
+        // Extract text from elements with data-role or className="extract"
+        const extractedText = extractAllText(element);
+        
+        if (extractedText) {
+            console.log(`  ✓ Extracted ${extractedText.split('\n').filter(l => l.trim()).length} lines of text for ATS`);
+        } else {
+            console.log(`  ⚠️  No text extracted - check that elements have data-role or className="extract"`);
+        }
+        
         const buffer = await render(element, {
             width: A4_WIDTH,
             height: A4_HEIGHT,
             background: "#ffffff",
         });
         
-        rendered.push({ name: `${page.order}-${page.name}`, buffer });
+        rendered.push({ 
+            name: `${page.order}-${page.name}`, 
+            buffer,
+            extractedText,
+        });
     }
     
     return rendered;
 }
 
-async function savePageImages(pages: { name: string; buffer: Buffer }[]): Promise<void> {
+async function savePageImages(pages: { name: string; buffer: Buffer; extractedText: string }[]): Promise<void> {
     const outputDir = join(__dirname, "../dist/pages");
     
     // Create output directory
@@ -75,10 +90,17 @@ async function savePageImages(pages: { name: string; buffer: Buffer }[]): Promis
         const outputPath = join(outputDir, `${page.name}.webp`);
         await writeFile(outputPath, page.buffer);
         console.log(`Saved: ${outputPath}`);
+        
+        // Also save extracted text for debugging
+        if (page.extractedText) {
+            const textPath = join(outputDir, `${page.name}.txt`);
+            await writeFile(textPath, page.extractedText);
+            console.log(`Saved extracted text: ${textPath}`);
+        }
     }
 }
 
-async function createPDF(pages: { name: string; buffer: Buffer }[]): Promise<void> {
+async function createPDF(pages: { name: string; buffer: Buffer; extractedText: string }[]): Promise<void> {
     const pdfDoc = await PDFDocument.create();
     
     for (const page of pages) {
@@ -102,6 +124,33 @@ async function createPDF(pages: { name: string; buffer: Buffer }[]): Promise<voi
             width: 595,
             height: 842,
         });
+        
+        // Embed extracted text as invisible text layer for ATS/CV parsers
+        if (page.extractedText) {
+            console.log(`Embedding extracted text for ${page.name}`);
+            
+            // Split text into lines
+            const lines = page.extractedText.split("\n");
+            
+            // Draw text in tiny, white (invisible) font at the bottom of the page
+            // This makes it accessible to text extractors but invisible to human readers
+            const fontSize = 1; // Extremely small
+            const lineHeight = 2;
+            let yPosition = 10; // Start from bottom
+            
+            for (const line of lines) {
+                if (line.trim()) {
+                    pdfPage.drawText(line.trim(), {
+                        x: 5,
+                        y: yPosition,
+                        size: fontSize,
+                        color: rgb(1, 1, 1), // White text (invisible on white background)
+                        maxWidth: 585,
+                    });
+                    yPosition += lineHeight;
+                }
+            }
+        }
     }
     
     // Save the PDF

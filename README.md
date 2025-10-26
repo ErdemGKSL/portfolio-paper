@@ -1,18 +1,23 @@
-# 📄 Portfolio Paper
+# Portfolio Paper Generator
 
-A TypeScript-based portfolio generator that renders React components to PDF using Satori. Create your professional portfolio as beautiful, print-ready pages with custom fonts and styling.
+A Node.js-based tool for generating professional portfolio documents as high-quality PDFs from React components. Built with TypeScript, Satori, and React, this project renders custom-designed pages into A4-sized documents perfect for printing or digital distribution.
 
 ## ✨ Features
 
-- 🎨 **React Components as Pages** - Write your portfolio pages using familiar React syntax
-- 📑 **PDF Generation** - Automatically compiles all pages into a single PDF document
-- 🖼️ **WebP Export** - Saves each page as optimized WebP images
-- 🔤 **Custom Fonts** - Auto-loads fonts from your local `fonts/` directory
-- 📏 **A4 Format** - All pages are properly sized for A4 paper (595×842px)
-- ⚡ **No Build Step** - Runs directly with `tsx` - no JavaScript compilation needed
-- 🔄 **Auto-Discovery** - Automatically finds and orders pages by filename
+- 📄 **React-based page design** - Design your portfolio pages using familiar React/TSX syntax
+- 🎨 **Custom font support** - Automatically loads local fonts from the `fonts/` directory
+- 🖼️ **Image handling** - Seamlessly embed images with automatic path resolution
+- 📑 **Multi-page PDF generation** - Combine multiple pages into a single PDF document
+- 🎯 **A4 print-ready output** - High-resolution rendering (2480x3508px @ 300 DPI)
+- 💾 **WebP intermediate format** - Saves individual pages as WebP images
+- 🔄 **Auto-discovery system** - Automatically finds and orders pages based on filename
 
 ## 🚀 Quick Start
+
+### Prerequisites
+
+- Node.js (v18 or higher recommended)
+- pnpm (or npm/yarn)
 
 ### Installation
 
@@ -28,46 +33,41 @@ pnpm install
 ### Usage
 
 ```bash
-# Generate your portfolio
+# Generate your portfolio PDF
 pnpm build
 ```
 
-This will:
-1. Load fonts from the `fonts/` directory
-2. Discover all pages in `src/pages/`
-3. Render each page to WebP images in `dist/pages/`
-4. Compile all pages into `dist/output.pdf`
+The output will be generated in the `dist/` directory:
+- `dist/pages/` - Individual WebP images for each page
+- `dist/output.pdf` - Final combined PDF document
 
 ## 📁 Project Structure
 
 ```
 portfolio-paper/
 ├── src/
-│   ├── index.ts           # Main orchestration logic
-│   ├── satori.ts          # Satori rendering engine
-│   ├── load-fonts.ts      # Automatic font loader
-│   └── pages/             # Your portfolio pages
-│       ├── 1-home.tsx     # Cover page
-│       ├── 2-about.tsx    # About page
-│       └── 3-projects.tsx # Projects page
-├── fonts/                 # Custom fonts directory
-│   ├── Roboto/
-│   └── Oswald/
-├── dist/                  # Generated output
-│   ├── pages/            # Individual WebP images
-│   └── output.pdf        # Final PDF document
+│   ├── index.ts           # Main entry point and orchestration
+│   ├── satori.ts          # SVG/image rendering logic
+│   ├── load-fonts.ts      # Font loading and registration
+│   └── pages/             # Portfolio pages (auto-discovered)
+│       └── 1-home.tsx     # Example home page
+├── fonts/                 # Custom font files
+│   ├── Oswald/
+│   └── Roboto/
+├── images/                # Static images referenced in pages
+├── dist/                  # Generated output (created on build)
 └── package.json
 ```
 
 ## 📝 Creating Pages
 
-Pages are React components with numbered filenames that determine their order:
+Pages are automatically discovered from the `src/pages/` directory. Name your files with a number prefix to control the order:
 
 ```tsx
-// src/pages/4-experience.tsx
+// src/pages/1-home.tsx
 import React from "react";
 
-export default function Experience() {
+export default function Home() {
     return (
         <div
             style={{
@@ -80,11 +80,11 @@ export default function Experience() {
                 fontFamily: "Roboto",
             }}
         >
-            <h1 style={{ fontFamily: "Oswald", fontSize: "48px" }}>
-                Experience
+            <h1 style={{ fontSize: "576px", fontFamily: "Oswald" }}>
+                Portfolio
             </h1>
-            <p style={{ fontSize: "18px", lineHeight: "1.6" }}>
-                Your experience content here...
+            <p style={{ fontSize: "256px", color: "#666666" }}>
+                Your Name
             </p>
         </div>
     );
@@ -93,19 +93,15 @@ export default function Experience() {
 
 ### Page Naming Convention
 
-Pages must follow the format: `{number}-{name}.tsx`
+- `1-home.tsx` - Order: 1, Name: "home"
+- `2-about.tsx` - Order: 2, Name: "about"
+- `3-projects.tsx` - Order: 3, Name: "projects"
 
-- ✅ `1-home.tsx`
-- ✅ `2-about.tsx`
-- ✅ `10-contact.tsx`
-- ❌ `home.tsx` (missing number)
-- ❌ `page-1.tsx` (number must be at start)
+The number prefix determines the page order in the final PDF.
 
-## 🔤 Using Custom Fonts
+## 🎨 Adding Custom Fonts
 
-### Adding Fonts
-
-1. Create a folder in `fonts/` with your font family name:
+1. Place your font files in the `fonts/` directory:
    ```
    fonts/
    └── YourFont/
@@ -115,104 +111,120 @@ Pages must follow the format: `{number}-{name}.tsx`
            └── YourFont-Italic.ttf
    ```
 
-2. The font loader automatically:
-   - Discovers all `.ttf` and `.otf` files
-   - Parses weights from filenames (Regular=400, Bold=700, etc.)
-   - Detects italic styles
-   - Registers them with Satori
+2. The system automatically:
+   - Scans the `fonts/` directory
+   - Loads all `.ttf` and `.otf` files
+   - Detects font weights and styles from filenames
+   - Registers them for use in your pages
 
-### Using Fonts in Pages
+3. Use the font in your components:
+   ```tsx
+   <h1 style={{ fontFamily: "YourFont", fontWeight: 700 }}>
+       Heading
+   </h1>
+   ```
 
-Simply reference the font family name in your styles:
+### Supported Font Weights
+
+- Thin: 100
+- ExtraLight: 200
+- Light: 300
+- Regular: 400
+- Medium: 500
+- SemiBold: 600
+- Bold: 700
+- ExtraBold: 800
+- Black: 900
+
+## 🖼️ Using Images
+
+Place images in the `images/` directory and reference them with absolute paths:
 
 ```tsx
-<h1 style={{ fontFamily: "YourFont", fontWeight: "bold" }}>
-    Hello World
-</h1>
+// In your page component
+<img src="/your-image.png" style={{ width: "500px" }} />
+
+// Or as background
+<div
+    style={{
+        backgroundImage: "url('/background.jpg')",
+        backgroundSize: "cover",
+    }}
+>
+    Content
+</div>
 ```
 
-### Supported Weight Keywords
+Supported formats: JPG, PNG, GIF, WebP, SVG
 
-The auto-loader recognizes these weight keywords in filenames:
+## 🔧 Technical Details
 
-- `Thin` → 100
-- `ExtraLight` → 200
-- `Light` → 300
-- `Regular` → 400
-- `Medium` → 500
-- `SemiBold` → 600
-- `Bold` → 700
-- `ExtraBold` → 800
-- `Black` → 900
+### Rendering Pipeline
 
-## 🎨 Styling Guidelines
+1. **Discovery** - Scans `src/pages/` for numbered `.tsx` files
+2. **Font Loading** - Loads and registers all fonts from `fonts/`
+3. **Page Rendering** - Each page component is rendered to SVG using Satori
+4. **Image Resolution** - Local images are converted to base64 data URLs
+5. **Rasterization** - SVG is converted to PNG using Resvg
+6. **Compression** - PNG is compressed to WebP format
+7. **PDF Assembly** - WebP images are converted to JPEG and embedded in PDF
 
-Since Satori has some limitations compared to browser CSS, follow these guidelines:
+### Output Specifications
 
-### ✅ Supported
+- **Resolution**: 2480x3508 pixels (300 DPI)
+- **Page Size**: A4 (210mm × 297mm)
+- **Image Format**: WebP (high quality)
+- **PDF Format**: JPEG-embedded pages at 95% quality
 
-- Flexbox layouts (`display: flex`)
-- Basic text styling (color, fontSize, fontWeight)
-- Backgrounds (backgroundColor)
-- Padding and margins
-- Border radius
+## 🛠️ Technologies
 
-### ❌ Not Supported
+- **React** - Component-based page design
+- **TypeScript** - Type-safe development
+- **Satori** - HTML/CSS to SVG conversion
+- **Resvg** - SVG to PNG rasterization
+- **Sharp** - Image processing and WebP conversion
+- **pdf-lib** - PDF document creation
 
-- CSS Grid
-- Advanced animations
-- Box shadows (limited)
-- Some CSS properties
-
-Refer to [Satori's documentation](https://github.com/vercel/satori) for full CSS support details.
-
-## 📐 Technical Details
-
-- **Page Dimensions**: 595×842 pixels (A4 at 72 DPI)
-- **Output Format**: WebP images + PDF
-- **Image Rendering**: Satori → SVG → ResvgJS → PNG → Sharp → WebP
-- **PDF Assembly**: pdf-lib
-
-## 🛠️ Development
-
-### Project Scripts
+## 📦 Dependencies
 
 ```json
 {
-  "scripts": {
-    "build": "tsx src/index.ts"
-  }
+  "react": "^19.2.0",
+  "@resvg/resvg-js": "^2.6.2",
+  "pdf-lib": "^1.17.1",
+  "satori": "^0.18.3",
+  "sharp": "^0.34.4"
 }
 ```
 
-### Dependencies
-
-- **satori** - Convert React components to SVG
-- **@resvg/resvg-js** - SVG to PNG rendering
-- **sharp** - Image processing and WebP conversion
-- **pdf-lib** - PDF document creation
-- **tsx** - TypeScript execution
-- **react** - Component framework
-
-## 📦 Output
-
-After running `pnpm build`, you'll find:
-
-- `dist/pages/*.webp` - Individual page images
-- `dist/output.pdf` - Complete portfolio PDF (ready to print!)
-
 ## 🤝 Contributing
 
-Contributions are welcome! Feel free to open issues or submit pull requests.
+Contributions are welcome! Feel free to:
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
 ## 📄 License
 
-ISC
+This project is licensed under the ISC License.
 
-## 👤 Author
+## 🙏 Acknowledgments
 
-**ErdemGKSL**
+- [Satori](https://github.com/vercel/satori) - Amazing HTML/CSS to SVG renderer
+- [Resvg](https://github.com/yisibl/resvg-js) - High-quality SVG rendering
+- [Sharp](https://sharp.pixelplumbing.com/) - Fast image processing
+
+## 💡 Tips
+
+- Use inline styles only (Satori doesn't support external CSS)
+- Flexbox is fully supported for layouts
+- Test font rendering with different weights and styles
+- Keep image sizes reasonable for faster processing
+- Use WebP format for final page previews (smaller file size)
 
 ---
 
-Made with ❤️ using [Satori](https://github.com/vercel/satori)
+Made with ❤️ for creating beautiful portfolio documents
