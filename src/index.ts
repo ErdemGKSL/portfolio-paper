@@ -6,10 +6,10 @@ import sharp from "sharp";
 import { autoLoadFonts } from "./load-fonts";
 import { render } from "./satori";
 
-// A4 dimensions in pixels at 72 DPI (standard for web)
+// A4 dimensions in pixels at 300 DPI (high quality print)
 // A4 is 210mm x 297mm = 8.27in x 11.69in
-const A4_WIDTH = 595; // ~8.27in * 72dpi
-const A4_HEIGHT = 842; // ~11.69in * 72dpi
+const A4_WIDTH = 2480; // ~8.27in * 300dpi
+const A4_HEIGHT = 3508; // ~11.69in * 300dpi
 
 interface Page {
     name: string;
@@ -90,15 +90,15 @@ async function createPDF(pages: { name: string; buffer: Buffer }[]): Promise<voi
         // Embed the PNG image
         const image = await pdfDoc.embedPng(pngBuffer);
         
-        // Add a page with A4 dimensions (in points: 595x842)
-        const pdfPage = pdfDoc.addPage([A4_WIDTH, A4_HEIGHT]);
+        // Add a page with A4 dimensions (in points: 595x842 for standard A4)
+        const pdfPage = pdfDoc.addPage([595, 842]);
         
-        // Draw the image to fill the entire page
+        // Draw the high-res image to fill the entire page
         pdfPage.drawImage(image, {
             x: 0,
             y: 0,
-            width: A4_WIDTH,
-            height: A4_HEIGHT,
+            width: 595,
+            height: 842,
         });
     }
     
