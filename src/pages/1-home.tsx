@@ -3,6 +3,7 @@ import React from "react";
 export default function Home() {
     return (
         <div
+            className="section"
             style={{
                 display: "flex",
                 flexDirection: "column",
@@ -23,6 +24,7 @@ export default function Home() {
                 }}
             >
                 <h1
+                    data-role="document-title"
                     style={{
                         fontSize: "576px",
                         fontWeight: "bold",
@@ -34,6 +36,7 @@ export default function Home() {
                     Portfolio
                 </h1>
                 <p
+                    data-role="name"
                     style={{
                         fontSize: "256px",
                         color: "#666666",
@@ -43,6 +46,7 @@ export default function Home() {
                     Your Name
                 </p>
                 <p
+                    data-role="date"
                     style={{
                         fontSize: "192px",
                         color: "#999999",
