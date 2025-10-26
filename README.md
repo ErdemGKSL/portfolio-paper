@@ -1,14 +1,8 @@
-# Portfolio Paper Generator# 📄 Portfolio Paper
-
-
+# 📄 Portfolio Paper Generator
 
 A Node.js-based tool for generating professional portfolio documents as high-quality PDFs from React components. Built with TypeScript, Satori, and React, this project renders custom-designed pages into A4-sized documents perfect for printing or digital distribution.A TypeScript-based portfolio generator that renders React components to PDF using Satori. Create your professional portfolio as beautiful, print-ready pages with custom fonts and styling.
 
-
-
 ## ✨ Features## ✨ Features
-
-
 
 - 📄 **React-based page design** - Design your portfolio pages using familiar React/TSX syntax- 🎨 **React Components as Pages** - Write your portfolio pages using familiar React syntax
 
@@ -25,14 +19,9 @@ A Node.js-based tool for generating professional portfolio documents as high-qua
 - 🔄 **Auto-discovery system** - Automatically finds and orders pages based on filename- 🔄 **Auto-Discovery** - Automatically finds and orders pages by filename
 
 
-
 ## 🚀 Quick Start## 🚀 Quick Start
 
-
-
 ### Prerequisites### Installation
-
-
 
 - Node.js (v18 or higher recommended)```bash
 
