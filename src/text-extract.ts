@@ -214,6 +214,7 @@ function inferRoleFromContext(elementType: string, text: string, fontSize: numbe
 /**
  * Formats extracted text as ATS-optimized plain text for embedding in PDF
  * Each top-level extract element is treated as a separate section
+ * Uses standard English labels and clean formatting for maximum ATS compatibility
  */
 export function formatExtractedText(extracted: ExtractedSection[]): string {
     // Sort by importance (high to low), then by vertical position (top to bottom)
@@ -235,62 +236,64 @@ export function formatExtractedText(extracted: ExtractedSection[]): string {
         // Format differently based on role and importance for ATS optimization
         let formattedText = section.text;
         
+        // Clean text for ATS: remove special characters that cause parsing issues
+        formattedText = cleanTextForATS(formattedText);
+        
         // Add semantic markers that ATS systems recognize
+        // Using standard English labels without special characters
         switch (role) {
             case "name":
                 // Name should be prominent - ATS systems look for this
-                formattedText = `NAME: ${section.text}`;
                 lines.push(formattedText);
                 lines.push(""); // Empty line for separation
                 break;
                 
             case "document-title":
-                formattedText = section.text.toUpperCase();
+                // Keep document title simple
                 lines.push(formattedText);
                 lines.push(""); // Empty line for separation
                 break;
                 
             case "section-heading":
-                // Section headings should be clear
-                formattedText = `\n--- ${section.text.toUpperCase()} ---`;
-                lines.push(formattedText);
+                // Section headings should be clear and standardized
+                // Translate common Turkish headings to English standard labels
+                const standardHeading = standardizeSectionHeading(section.text);
+                lines.push("");
+                lines.push(standardHeading);
+                lines.push(""); // Empty line for separation
                 break;
                 
             case "email":
-                formattedText = `EMAIL: ${section.text}`;
-                lines.push(formattedText);
+                lines.push(`Email: ${formattedText}`);
                 break;
                 
             case "phone":
-                formattedText = `PHONE: ${section.text}`;
-                lines.push(formattedText);
+                lines.push(`Phone: ${formattedText}`);
                 break;
                 
             case "url":
             case "social":
-                formattedText = `LINK: ${section.text}`;
+                // Keep URLs clean without labels for better parsing
                 lines.push(formattedText);
                 break;
                 
             case "date":
-                formattedText = `DATE: ${section.text}`;
+                // Dates should be clean without labels
                 lines.push(formattedText);
                 break;
                 
             case "experience-section":
             case "education-section":
             case "skills-section":
-                formattedText = `\n=== ${section.text.toUpperCase()} ===`;
-                lines.push(formattedText);
+                // Use standard section labels
+                const standardLabel = standardizeSectionHeading(section.text);
+                lines.push("");
+                lines.push(standardLabel);
                 lines.push(""); // Empty line for separation
                 break;
                 
             default:
-                // Regular content
-                if (importance >= 7) {
-                    // High importance - make it stand out
-                    formattedText = section.text.toUpperCase();
-                }
+                // Regular content - keep it simple
                 lines.push(formattedText);
                 
                 // Add spacing after top-level sections
@@ -301,6 +304,114 @@ export function formatExtractedText(extracted: ExtractedSection[]): string {
     }
     
     return lines.join("\n").trim();
+}
+
+/**
+ * Clean text for ATS compatibility
+ * Removes or replaces special characters that cause parsing issues
+ */
+function cleanTextForATS(text: string): string {
+    return text
+        // Remove decorative characters and symbols
+        .replace(/[●•◆▪▫]/g, '-') // Replace bullets with simple dash
+        .replace(/[─┼├└│]/g, '-') // Replace box drawing characters
+        .replace(/[""]/g, '"') // Replace smart quotes with regular quotes
+        .replace(/['']/g, "'") // Replace smart apostrophes
+        .replace(/…/g, '...') // Replace ellipsis
+        .replace(/—/g, '-') // Replace em dash
+        .replace(/–/g, '-') // Replace en dash
+        // Keep percentage signs but ensure they're readable
+        .replace(/(\d)\s*%/g, '$1 percent') // Convert "90%" to "90 percent"
+        // Remove multiple spaces
+        .replace(/\s+/g, ' ')
+        .trim();
+}
+
+/**
+ * Standardize section headings to ATS-friendly English labels
+ * Maps common section names (including Turkish) to standard English equivalents
+ */
+function standardizeSectionHeading(heading: string): string {
+    const normalized = heading.toLowerCase().trim();
+    
+    // Map common headings to standard ATS-recognized labels
+    const headingMap: Record<string, string> = {
+        // Turkish to English mappings
+        'deneyimler': 'WORK EXPERIENCE',
+        'deneyim': 'WORK EXPERIENCE',
+        'iş deneyimi': 'WORK EXPERIENCE',
+        'çalışma deneyimi': 'WORK EXPERIENCE',
+        'profesyonel deneyim': 'WORK EXPERIENCE',
+        
+        'eğitim': 'EDUCATION',
+        'öğrenim': 'EDUCATION',
+        'eğitim bilgileri': 'EDUCATION',
+        
+        'yetenekler': 'SKILLS',
+        'beceriler': 'SKILLS',
+        'teknik beceriler': 'TECHNICAL SKILLS',
+        'teknik yetenekler': 'TECHNICAL SKILLS',
+        
+        'projeler': 'PROJECTS',
+        'proje': 'PROJECTS',
+        'kişisel projeler': 'PROJECTS',
+        
+        'sertifikalar': 'CERTIFICATIONS',
+        'sertifika': 'CERTIFICATIONS',
+        
+        'diller': 'LANGUAGES',
+        'yabancı diller': 'LANGUAGES',
+        
+        'referanslar': 'REFERENCES',
+        'referans': 'REFERENCES',
+        
+        'hakkımda': 'SUMMARY',
+        'özet': 'SUMMARY',
+        'profil': 'SUMMARY',
+        
+        'iletişim': 'CONTACT',
+        'iletişim bilgileri': 'CONTACT',
+        
+        // English standard headings (uppercase them)
+        'experience': 'WORK EXPERIENCE',
+        'work experience': 'WORK EXPERIENCE',
+        'professional experience': 'WORK EXPERIENCE',
+        'employment': 'WORK EXPERIENCE',
+        'employment history': 'WORK EXPERIENCE',
+        
+        'education': 'EDUCATION',
+        'academic background': 'EDUCATION',
+        
+        'skills': 'SKILLS',
+        'technical skills': 'TECHNICAL SKILLS',
+        'core competencies': 'SKILLS',
+        
+        'projects': 'PROJECTS',
+        
+        'certifications': 'CERTIFICATIONS',
+        'certificates': 'CERTIFICATIONS',
+        'licenses': 'CERTIFICATIONS',
+        
+        'languages': 'LANGUAGES',
+        
+        'references': 'REFERENCES',
+        
+        'summary': 'SUMMARY',
+        'profile': 'SUMMARY',
+        'objective': 'SUMMARY',
+        'professional summary': 'SUMMARY',
+        
+        'contact': 'CONTACT',
+        'contact information': 'CONTACT',
+    };
+    
+    // Check if we have a mapping for this heading
+    if (headingMap[normalized]) {
+        return headingMap[normalized];
+    }
+    
+    // If no mapping found, return cleaned uppercase version
+    return cleanTextForATS(heading).toUpperCase();
 }
 
 /**
