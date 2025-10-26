@@ -120,6 +120,13 @@ export default function Extra() {
                     color="#3182ce"
                     description="Bulut teknolojileri alanında faaliyet gösteren bir firmanın frontend geliştirme süreçlerine katkıda bulundum. 1 aylık staj sürecinde modern web teknolojileri ile çalışma fırsatı buldum."
                 />
+
+                <ExperienceCard
+                    title="Maltepe Üniversitesi Asistanlık"
+                    type="Üniversite"
+                    color="#3182ce"
+                    description="Öğrenci asistanı olarak, ders materyallerinin hazırlanmasında ve öğrencilere destek sağlanmasında görev aldım. Yaklaşık 2.5 yıl süren bu deneyimin, 1 yılı resmi asistanlık statüsünde olurken 1.5 senesi ise gönüllü asistanlıktı. Prof. Dr. Ensar Gül'ün liderliğinde çalıştım."
+                />
                 
                 <ExperienceCard
                     title="Gazete Keyfi"
@@ -143,14 +150,7 @@ export default function Extra() {
                     title="MangaWind"
                     type="Kapalı Kaynak"
                     color="#9f7aea"
-                    description="Freelance olarak geliştirdiğim fullstack bir manga platformu. Backend tarafında Rust, frontend tarafında SvelteKit teknolojilerini kullanarak modern ve performanslı bir uygulama oluşturdum."
-                />
-                
-                <ExperienceCard
-                    title="Acord"
-                    type="Kapalı Kaynak"
-                    color="#9f7aea"
-                    description="Discord'un ülkemizde yasaklanmasından önce geliştirdiğim, artık aktif olarak sürdürülmeyen bir Discord modlama aracı. Bir arkadaşımla birlikte dünya çapında bu alanda çalışan ilk Türk geliştiriciler olduk. Proje, kullanıcı deneyimini iyileştirmeye yönelik çeşitli özelleştirmeler sunuyordu."
+                    description="Freelance olarak geliştirdiğim fullstack bir çizgi-roman platformu. Backend tarafında Rust, frontend tarafında SvelteKit teknolojilerini kullanarak modern ve performanslı bir uygulama oluşturdum."
                 />
             </Section>
 

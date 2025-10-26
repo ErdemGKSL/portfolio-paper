@@ -1,8 +1,8 @@
 import React from "react";
 
 const SkillBar = ({ skill, percentage, color }: { skill: string; percentage: number; color: string }) => (
-    <div style={{ marginBottom: "42px", display: "flex", flexDirection: "column" }}>
-        <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "17px" }}>
+    <div style={{ marginBottom: "30px", display: "flex", flexDirection: "column" }}>
+        <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "15px" }}>
             <span style={{ fontSize: "50px", fontWeight: "600", color: "#2d3748" }}>{skill}</span>
             <span style={{ fontSize: "46px", color: "#718096", fontWeight: "600" }}>{percentage}%</span>
         </div>
@@ -13,8 +13,8 @@ const SkillBar = ({ skill, percentage, color }: { skill: string; percentage: num
 );
 
 const Section = ({ title, children }: { title: string; children: React.ReactNode }) => (
-    <div style={{ marginBottom: "83px", display: "flex", flexDirection: "column" }}>
-        <div style={{ display: "flex", alignItems: "center", marginBottom: "42px" }}>
+    <div style={{ marginBottom: "50px", display: "flex", flexDirection: "column" }}>
+        <div style={{ display: "flex", alignItems: "center", marginBottom: "35px" }}>
             <h2 style={{
                 fontSize: "67px",
                 fontWeight: "700",
@@ -50,8 +50,8 @@ export default function Home() {
                 display: "flex",
                 justifyContent: "space-between",
                 alignItems: "flex-start",
-                marginBottom: "100px",
-                paddingBottom: "67px",
+                marginBottom: "60px",
+                paddingBottom: "40px",
                 borderBottom: "8px solid #2d3748",
             }}>
                 <div style={{ display: "flex", gap: "67px", alignItems: "center" }}>
@@ -106,9 +106,9 @@ export default function Home() {
 
             {/* Ana Bilgiler Section */}
             <div style={{
-                marginBottom: "50px",
+                marginBottom: "25px",
                 backgroundColor: "#f7fafc",
-                padding: "42px 50px",
+                padding: "20px 25px",
                 borderRadius: "25px",
                 border: "4px solid #3182ce",
                 display: "flex",
@@ -184,12 +184,17 @@ export default function Home() {
                 {/* Left Column */}
                 <div style={{ flex: "1", display: "flex", flexDirection: "column" }}>
                     {/* Skills Section */}
-                    <Section title="Teknik Yetenekler">
-                        <SkillBar skill="TypeScript & Node.js" percentage={99} color="#3178c6" />
-                        <SkillBar skill="Svelte/Kit" percentage={95} color="#ff3e00" />
-                        <SkillBar skill="HTML & CSS" percentage={90} color="#e34c26" />
-                        <SkillBar skill="Rust" percentage={60} color="#ce422b" />
-                        <SkillBar skill="Kotlin & Java" percentage={30} color="#7f52ff" />
+                    <Section title="Yetenekler">
+                        <SkillBar skill="Web Geliştirme" percentage={99} color="#3178c6" />
+                        <SkillBar skill="Sunucu Geliştirme" percentage={95} color="#38a169" />
+                        <SkillBar skill="Mobil Programlama" percentage={65} color="#fbbf24" />
+                        <SkillBar skill="Masaüstü Uygulama Geliştirme" percentage={80} color="#e53e3e" />
+                    </Section>
+
+                    {/* Foreign Languages Section */}
+                    <Section title="Yabancı Diller">
+                        <SkillBar skill="İngilizce" percentage={90} color="#3182ce" />
+                        <SkillBar skill="Japonca" percentage={20} color="#38a169" />
                     </Section>
 
                     {/* Education Section */}
@@ -264,7 +269,7 @@ export default function Home() {
                             backgroundColor: "#f7fafc",
                             padding: "50px",
                             borderRadius: "25px",
-                            fontSize: "46px",
+                            fontSize: "44px",
                             lineHeight: "1.6",
                             color: "#4a5568",
                             display: "flex",
@@ -272,17 +277,20 @@ export default function Home() {
                         }}>
                             <p style={{ margin: "0 0 33px 0" }}>
                                 TypeScript ve Node.js ekosistemleri konusunda kapsamlı deneyime sahip, tutkulu bir fullstack geliştiriciyim. 
-                                Açık kaynak yazılım ve Linux tabanlı geliştirme ortamlarının güçlü bir savunucusuyum.
-                            </p>
-                            <p style={{ margin: "0 0 33px 0" }}>
-                                Ana geliştirme ortamım olarak Arch Linux kullanıyorum, bu da sistemleri daha derin bir seviyede 
-                                anlama ve geliştirme kurulumumun tam kontrolüne sahip olma taahhüdümü yansıtıyor.
+                                Açık kaynak yazılım ve Linux tabanlı geliştirmeleri seviyorum, dolayısıyla sunuculara çok hakimim.
                             </p>
                             <p style={{ margin: "0" }}>
                                 Şu anda sistem programlama ve yüksek performanslı uygulamalar geliştirmek için Rust'ı keşfediyorum. 
                                 50'den fazla tamamlanmış projeyle, sağlam çözümler sunma konusunda pratik deneyim getiriyorum.
                             </p>
                         </div>
+                    </Section>
+
+                    {/* Programming Languages Section */}
+                    <Section title="Yazılım Dilleri">
+                        <SkillBar skill="Node.js & HTML & CSS" percentage={99} color="#3178c6" />
+                        <SkillBar skill="Rust" percentage={60} color="#ce422b" />
+                        <SkillBar skill="Kotlin & Java" percentage={30} color="#7f52ff" />
                     </Section>
 
                     {/* Additional Info */}
