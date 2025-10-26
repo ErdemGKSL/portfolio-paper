@@ -106,9 +106,9 @@ export default function Home() {
 
             {/* Ana Bilgiler Section */}
             <div style={{
-                marginBottom: "100px",
+                marginBottom: "50px",
                 backgroundColor: "#f7fafc",
-                padding: "50px 67px",
+                padding: "42px 50px",
                 borderRadius: "25px",
                 border: "4px solid #3182ce",
                 display: "flex",
@@ -119,10 +119,10 @@ export default function Home() {
                     display: "flex", 
                     justifyContent: "center",
                     width: "100%",
-                    marginBottom: "33px",
+                    marginBottom: "25px",
                 }}>
                     <h2 style={{
-                        fontSize: "67px",
+                        fontSize: "58px",
                         fontWeight: "700",
                         color: "#1a202c",
                         fontFamily: "Oswald",
@@ -134,29 +134,47 @@ export default function Home() {
                         ANA BİLGİLER
                     </h2>
                 </div>
-                <div style={{ display: "flex", gap: "100px", justifyContent: "space-around", width: "100%" }}>
+                <div style={{ display: "flex", gap: "50px", justifyContent: "space-around", width: "100%" }}>
                     <div style={{ display: "flex", flexDirection: "column", alignItems: "center", flex: 1 }}>
-                        <span style={{ fontSize: "54px", fontWeight: "700", color: "#3182ce", marginBottom: "12px" }}>
+                        <span style={{ fontSize: "46px", fontWeight: "700", color: "#3182ce", marginBottom: "8px" }}>
                             Yaş
                         </span>
-                        <span style={{ fontSize: "67px", fontWeight: "700", color: "#2d3748" }}>
+                        <span style={{ fontSize: "54px", fontWeight: "700", color: "#2d3748" }}>
                             21
                         </span>
                     </div>
                     <div style={{ display: "flex", flexDirection: "column", alignItems: "center", flex: 1 }}>
-                        <span style={{ fontSize: "54px", fontWeight: "700", color: "#3182ce", marginBottom: "12px" }}>
+                        <span style={{ fontSize: "46px", fontWeight: "700", color: "#3182ce", marginBottom: "8px" }}>
                             Ünvan
                         </span>
-                        <span style={{ fontSize: "67px", fontWeight: "700", color: "#2d3748", textAlign: "center" }}>
+                        <span style={{ fontSize: "54px", fontWeight: "700", color: "#2d3748", textAlign: "center" }}>
                             Yazılım Mühendisi
                         </span>
                     </div>
                     <div style={{ display: "flex", flexDirection: "column", alignItems: "center", flex: 1 }}>
-                        <span style={{ fontSize: "54px", fontWeight: "700", color: "#3182ce", marginBottom: "12px" }}>
+                        <span style={{ fontSize: "46px", fontWeight: "700", color: "#3182ce", marginBottom: "8px" }}>
                             Uzmanlık Alanı
                         </span>
-                        <span style={{ fontSize: "67px", fontWeight: "700", color: "#2d3748", textAlign: "center" }}>
+                        <span style={{ fontSize: "54px", fontWeight: "700", color: "#2d3748", textAlign: "center" }}>
                             Backend
+                        </span>
+                    </div>
+                </div>
+                <div style={{ display: "flex", gap: "50px", justifyContent: "space-around", width: "100%", marginTop: "25px" }}>
+                    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", flex: 1 }}>
+                        <span style={{ fontSize: "46px", fontWeight: "700", color: "#3182ce", marginBottom: "8px" }}>
+                            E-posta
+                        </span>
+                        <span style={{ fontSize: "42px", fontWeight: "600", color: "#2d3748" }}>
+                            erdem.goksel.dev@gmail.com
+                        </span>
+                    </div>
+                    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", flex: 1 }}>
+                        <span style={{ fontSize: "46px", fontWeight: "700", color: "#3182ce", marginBottom: "8px" }}>
+                            Telefon
+                        </span>
+                        <span style={{ fontSize: "42px", fontWeight: "600", color: "#2d3748" }}>
+                            +90 532 595 5586
                         </span>
                     </div>
                 </div>
@@ -269,7 +287,7 @@ export default function Home() {
 
                     {/* Additional Info */}
                     <Section title="Ek Bilgiler">
-                        <div style={{ display: "flex", flexDirection: "column", gap: "33px" }}>
+                        <div style={{ display: "flex", flexDirection: "column", gap: "25px" }}>
                             <div style={{
                                 display: "flex",
                                 alignItems: "center",
@@ -286,6 +304,24 @@ export default function Home() {
                                 }} />
                                 <span style={{ fontSize: "46px", color: "#2d3748" }}>
                                     Askerlik: 2028'e kadar tecilli
+                                </span>
+                            </div>
+                            <div style={{
+                                display: "flex",
+                                alignItems: "center",
+                                padding: "33px 50px",
+                                backgroundColor: "#edf2f7",
+                                borderRadius: "17px",
+                            }}>
+                                <div style={{
+                                    width: "25px",
+                                    height: "25px",
+                                    backgroundColor: "#ff8b32",
+                                    borderRadius: "50%",
+                                    marginRight: "33px",
+                                }} />
+                                <span style={{ fontSize: "46px", color: "#2d3748" }}>
+                                    Ehliyet: Kurs aşamasında
                                 </span>
                             </div>
                             <div style={{
