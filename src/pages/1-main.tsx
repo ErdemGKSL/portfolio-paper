@@ -162,10 +162,10 @@ export default function Home() {
                 <div style={{ display: "flex", gap: "50px", justifyContent: "space-around", width: "100%" }}>
                     <div data-role="content" style={{ display: "flex", flexDirection: "column", alignItems: "center", flex: 1 }}>
                         <span style={{ fontSize: "46px", fontWeight: "700", color: "#3182ce", marginBottom: "8px" }}>
-                            Yaş
+                            Doğum Tarihi
                         </span>
                         <span style={{ fontSize: "54px", fontWeight: "700", color: "#2d3748" }}>
-                            21
+                            27 Mayıs 2003
                         </span>
                     </div>
                     <div data-role="content" style={{ display: "flex", flexDirection: "column", alignItems: "center", flex: 1 }}>
@@ -181,7 +181,7 @@ export default function Home() {
                             Uzmanlık Alanı
                         </span>
                         <span style={{ fontSize: "54px", fontWeight: "700", color: "#2d3748", textAlign: "center" }}>
-                            Backend
+                            Web
                         </span>
                     </div>
                 </div>
@@ -207,22 +207,33 @@ export default function Home() {
 
             <div style={{ display: "flex", gap: "100px" }}>
                 {/* Left Column */}
-                <div style={{ flex: "1", display: "flex", flexDirection: "column" }}>
-                    {/* Skills Section */}
-                    <Section title="Yetenekler">
-                        <SkillBar skill="Web Geliştirme" percentage={99} color="#3178c6" data-role="skills-section" />
-                        <SkillBar skill="Sunucu Geliştirme" percentage={95} color="#38a169" data-role="skills-section" />
-                        <SkillBar skill="Mobil Programlama" percentage={65} color="#fbbf24" data-role="skills-section" />
-                        <SkillBar skill="Masaüstü Uygulama Geliştirme" percentage={80} color="#e53e3e" data-role="skills-section" />
+<div style={{ flex: "1", display: "flex", flexDirection: "column" }}>
+                    {/* About Me Section */}
+                    <Section title="Hakkımda">
+                        <div 
+                            data-role="content"
+                            style={{
+                                backgroundColor: "#f7fafc",
+                                padding: "50px",
+                                borderRadius: "25px",
+                                fontSize: "44px",
+                                lineHeight: "1.6",
+                                color: "#4a5568",
+                                display: "flex",
+                                flexDirection: "column",
+                            }}>
+                            <p style={{ margin: "0 0 33px 0" }}>
+                                TypeScript ve Node.js ekosistemleri konusunda kapsamlı deneyime sahip, tutkulu bir fullstack geliştiriciyim. 
+                                Açık kaynak yazılım ve Linux tabanlı geliştirmeleri seviyorum, dolayısıyla sunuculara çok hakimim.
+                            </p>
+                            <p style={{ margin: "0" }}>
+                                Şu anda sistem programlama ve yüksek performanslı uygulamalar geliştirmek için Rust'ı keşfediyorum. 
+                                50'den fazla tamamlanmış projeyle, sağlam çözümler sunma konusunda pratik deneyim getiriyorum.
+                            </p>
+                        </div>
                     </Section>
 
-                    {/* Foreign Languages Section */}
-                    <Section title="Yabancı Diller">
-                        <SkillBar skill="İngilizce" percentage={90} color="#3182ce" data-role="content" />
-                        <SkillBar skill="Japonca" percentage={20} color="#38a169" data-role="content" />
-                    </Section>
-
-                    {/* Education Section */}
+                     {/* Education Section */}
                     <Section title="Eğitim">
                         <div 
                             data-role="education"
@@ -244,6 +255,39 @@ export default function Home() {
                                 2021 - 2025 • Mezun (Bütün dersler verildi, staj dahil, mezuniyet bekleniyor)
                             </div>
                         </div>
+                    </Section>
+
+                    {/* Additional Info */}
+                    <Section title="Ek Bilgiler">
+                        <div style={{ display: "flex", flexDirection: "column", gap: "25px" }}>
+                            <InfoBox text="Askerlik: 2028'e kadar tecilli" color="#48bb78" data-role="content" />
+                            <InfoBox text="Ehliyet: Kurs aşamasında" color="#ff8b32" data-role="content" />
+                            <InfoBox text="Ana İşletim Sistemi: Arch Linux" color="#4299e1" data-role="content" />
+                        </div>
+                    </Section>
+                </div>
+
+                {/* Right Column */}
+                <div style={{ flex: "1", display: "flex", flexDirection: "column" }}>
+                    {/* Skills Section */}
+                    <Section title="Yetenekler">
+                        <SkillBar skill="Web Geliştirme" percentage={99} color="#3178c6" data-role="skills-section" />
+                        <SkillBar skill="Sunucu Geliştirme" percentage={95} color="#38a169" data-role="skills-section" />
+                        <SkillBar skill="Mobil Programlama" percentage={65} color="#fbbf24" data-role="skills-section" />
+                        <SkillBar skill="Masaüstü Uygulama Geliştirme" percentage={80} color="#e53e3e" data-role="skills-section" />
+                    </Section>
+
+                    {/* Foreign Languages Section */}
+                    <Section title="Yabancı Diller">
+                        <SkillBar skill="İngilizce" percentage={90} color="#3182ce" data-role="content" />
+                        <SkillBar skill="Japonca" percentage={20} color="#38a169" data-role="content" />
+                    </Section>
+
+                    {/* Programming Languages Section */}
+                    <Section title="Yazılım Dilleri">
+                        <SkillBar skill="Node.js & HTML & CSS" percentage={99} color="#3178c6" data-role="skills-section" />
+                        <SkillBar skill="Rust" percentage={60} color="#ce422b" data-role="skills-section" />
+                        <SkillBar skill="Kotlin & Java" percentage={30} color="#7f52ff" data-role="skills-section" />
                     </Section>
 
                     {/* Links Section */}
@@ -286,50 +330,6 @@ export default function Home() {
                                     Çok yüksek aktivite, çok sayıda açık kaynak projesi. Zen Browser'a da katkıda bulundum.
                                 </div>
                             </div>
-                        </div>
-                    </Section>
-                </div>
-
-                {/* Right Column */}
-                <div style={{ flex: "1", display: "flex", flexDirection: "column" }}>
-                    {/* About Me Section */}
-                    <Section title="Hakkımda">
-                        <div 
-                            data-role="content"
-                            style={{
-                                backgroundColor: "#f7fafc",
-                                padding: "50px",
-                                borderRadius: "25px",
-                                fontSize: "44px",
-                                lineHeight: "1.6",
-                                color: "#4a5568",
-                                display: "flex",
-                                flexDirection: "column",
-                            }}>
-                            <p style={{ margin: "0 0 33px 0" }}>
-                                TypeScript ve Node.js ekosistemleri konusunda kapsamlı deneyime sahip, tutkulu bir fullstack geliştiriciyim. 
-                                Açık kaynak yazılım ve Linux tabanlı geliştirmeleri seviyorum, dolayısıyla sunuculara çok hakimim.
-                            </p>
-                            <p style={{ margin: "0" }}>
-                                Şu anda sistem programlama ve yüksek performanslı uygulamalar geliştirmek için Rust'ı keşfediyorum. 
-                                50'den fazla tamamlanmış projeyle, sağlam çözümler sunma konusunda pratik deneyim getiriyorum.
-                            </p>
-                        </div>
-                    </Section>
-
-                    {/* Programming Languages Section */}
-                    <Section title="Yazılım Dilleri">
-                        <SkillBar skill="Node.js & HTML & CSS" percentage={99} color="#3178c6" data-role="skills-section" />
-                        <SkillBar skill="Rust" percentage={60} color="#ce422b" data-role="skills-section" />
-                        <SkillBar skill="Kotlin & Java" percentage={30} color="#7f52ff" data-role="skills-section" />
-                    </Section>
-
-                    {/* Additional Info */}
-                    <Section title="Ek Bilgiler">
-                        <div style={{ display: "flex", flexDirection: "column", gap: "25px" }}>
-                            <InfoBox text="Askerlik: 2028'e kadar tecilli" color="#48bb78" data-role="content" />
-                            <InfoBox text="Ehliyet: Kurs aşamasında" color="#ff8b32" data-role="content" />
-                            <InfoBox text="Ana İşletim Sistemi: Arch Linux" color="#4299e1" data-role="content" />
                         </div>
                     </Section>
                 </div>
