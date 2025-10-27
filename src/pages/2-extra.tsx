@@ -187,6 +187,14 @@ export default function Extra() {
                     description="Freelance olarak geliştirdiğim fullstack bir çizgi-roman platformu. Backend tarafında Rust, frontend tarafında SvelteKit teknolojilerini kullanarak modern ve performanslı bir uygulama oluşturdum."
                     data-role="experience-section"
                 />
+
+                <ExperienceCard
+                    title="Acord"
+                    type="Kapalı Kaynak"
+                    color="#9f7aea"
+                    description="Discord'un ülkemizde yasaklanmasından önce geliştirdiğim, artık aktif olarak sürdürülmeyen bir Discord modlama aracı. Bir arkadaşımla birlikte dünya çapında bu alanda çalışan ilk Türk geliştiriciler olduk. Proje, kullanıcı deneyimini iyileştirmeye yönelik çeşitli özelleştirmeler sunuyordu."
+                    data-role="experience-section"
+                />
             </Section>
 
             {/* Footer Note */}
